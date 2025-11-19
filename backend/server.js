@@ -8,6 +8,7 @@ const app = express();
 const authRoutes = require("./routes/authRoute");
 const actRoutes = require("./routes/act");
 const userProfile = require("./routes/profileRoute");
+const Act = require("./models/kindnessAct");
 
 
 const corsOptions = {
@@ -19,20 +20,22 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/Act')
-  .then(() => console.log('database Connected'))
-  .catch((err)=>console.error(err));
+
 
 // ✅ Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/acts", actRoutes);
 app.use("/api/user", userProfile);
 
+
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('database Connected'))
+  .catch((err)=>console.error(err));
+
 app.get("/", (req, res) => {
   res.send("working");
 });
 
-// ✅ Start server AFTER DB connects
 app.listen(5000, () => {
   console.log("server is running on port 5000");
 });
