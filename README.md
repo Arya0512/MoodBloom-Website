@@ -88,7 +88,7 @@ MoodBloom/
 
 🚀 Getting Started
 1️⃣ Clone the Repository
-git clone https://github.com/yourusername/moodbloom.git
+git clonne https://github.com/Arya0512/MoodBloom-Website
 cd moodbloom
 
 🔧 Backend Setup
