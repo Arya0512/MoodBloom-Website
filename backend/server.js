@@ -19,6 +19,7 @@ app.use(express.json());
 const allowedOrigins = [
   "http://localhost:5173",
   "https://moodbloom-act-website.onrender.com",
+  "https://moodbloom-webapp.onrender.com",
 ];
 
 const corsOptions = {
