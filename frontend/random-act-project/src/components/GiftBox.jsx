@@ -13,7 +13,7 @@ const GiftBox = ({ act }) => {
         return;
       }
       const res = await axios.post(
-        "http://localhost:5000/api/acts/add-task",
+        `${import.meta.env.VITE_API_BASE_URL}/api/acts/add-task`,
         { actId: act._id },
         { headers: { Authorization: `Bearer ${token}` } }
       );

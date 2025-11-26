@@ -9,7 +9,7 @@ const Profile = () => {
   // Fetch user details
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await fetch("http://localhost:5000/api/user/profile", {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/user/profile`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -27,7 +27,7 @@ const Profile = () => {
 
   const completeTask = async (taskId) => {
     const res = await fetch(
-      `http://localhost:5000/api/user/complete-task/${taskId}`,
+      `${import.meta.env.VITE_API_BASE_URL}/api/user/complete-task/${taskId}`,
       {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
@@ -48,7 +48,7 @@ const Profile = () => {
   };
   const deleteCompletedTask = async (taskId) => {
   const res = await fetch(
-    `http://localhost:5000/api/user/completed-task/${taskId}`,
+    `${import.meta.env.VITE_API_BASE_URL}/api/user/completed-task/${taskId}`,
     {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },

@@ -14,17 +14,28 @@ const Signup = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post("http://localhost:5000/api/auth/signup", form);
-      alert("Signup Successfully");
-      localStorage.setItem("token", res.data.token);
-      navigate("/home");
-    } catch (err) {
-      alert(err.response?.data?.message || "Signup failed");
-    }
-  };
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await axios.post(
+      `${import.meta.env.VITE_API_BASE_URL}/api/auth/signup`,
+      form,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      }
+    );
+
+    alert("Signup Successfully");
+    localStorage.setItem("token", res.data.token);
+    navigate("/home");
+  } catch (err) {
+    alert(err.response?.data?.message || "Signup failed");
+  }
+};
+
 
   return (
     <div

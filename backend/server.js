@@ -11,13 +11,8 @@ const userProfile = require("./routes/profileRoute");
 const Act = require("./models/kindnessAct");
 
 
-const corsOptions = {
-  origin: '*', 
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true,
-};
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 
 

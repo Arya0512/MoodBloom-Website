@@ -17,7 +17,7 @@ const MoodSelector = () => {
     const token = localStorage.getItem("token");
     try {
       const res = await fetch(
-        `http://localhost:5000/api/acts/mood?mood=${selectedMood}`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/acts/mood?mood=${selectedMood}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
