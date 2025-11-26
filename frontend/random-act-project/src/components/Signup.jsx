@@ -23,8 +23,8 @@ const Signup = () => {
       {
         headers: {
           "Content-Type": "application/json",
-        },
-        withCredentials: true,
+          "Accept": "application/json",
+        }
       }
     );
 
@@ -35,6 +35,7 @@ const Signup = () => {
     alert(err.response?.data?.message || "Signup failed");
   }
 };
+
 
 
   return (
