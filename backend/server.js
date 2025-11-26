@@ -15,9 +15,16 @@ const userProfile = require("./routes/profileRoute");
 // ===== CORS Setup =====
 
 
+// ===== CORS Setup =====
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://moodbloom-act-website.onrender.com",
+];
+
 const corsOptions = {
   origin: function (origin, callback) {
-    if (!origin) return callback(null, true); // allow Postman / server-to-server requests
+    if (!origin) return callback(null, true); 
+
     if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -25,17 +32,13 @@ const corsOptions = {
     }
   },
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  credentials: true, // allows cookies/auth headers
+  credentials: true,
 };
 
-// Enable CORS for all routes
+// enable cors
 app.use(cors(corsOptions));
-
-// Preflight handling
 app.options("*", cors(corsOptions));
 
-// ===== Middleware =====
-app.use(express.json());
 
 // ===== Routes =====
 app.use("/api/auth", authRoutes);
