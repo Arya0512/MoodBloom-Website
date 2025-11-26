@@ -18,25 +18,31 @@ app.use(express.json());
 // ===== CORS Setup =====
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://moodbloom-project-git-main-arya-waskars-projects.vercel.app/",
+  "https://moodbloom-project-git-main-arya-waskars-projects.vercel.app",
+  "https://moodbloom-project-esjohygje-arya-waskars-projects.vercel.app",
 ];
 
-const corsOptions = {
+app.use(cors({
   origin: function (origin, callback) {
-    if (!origin) return callback(null, true); // allow Postman or server-to-server requests
+    // allow server-to-server requests like Postman
+    if (!origin) return callback(null, true);
+
     if (allowedOrigins.includes(origin)) {
-      callback(null, origin); // send origin explicitly for credentials
+      callback(null, origin);
     } else {
       callback(new Error("Not allowed by CORS"));
     }
   },
   credentials: true, // allow cookies/auth headers
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-};
+}));
 
-// Apply CORS
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+// Preflight handling
+app.options("*", cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
+
 
 // ===== Routes =====
 app.use("/api/auth", authRoutes);
