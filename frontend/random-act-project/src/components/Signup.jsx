@@ -13,19 +13,13 @@ const Signup = () => {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
- const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
   try {
     const res = await axios.post(
       `${import.meta.env.VITE_API_BASE_URL}/api/auth/signup`,
       form,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        }
-      }
+      { withCredentials: true }
     );
 
     alert("Signup Successfully");
@@ -35,8 +29,6 @@ const Signup = () => {
     alert(err.response?.data?.message || "Signup failed");
   }
 };
-
-
 
   return (
     <div

@@ -16,14 +16,24 @@ const userProfile = require("./routes/profileRoute");
 
 
 const corsOptions = {
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true, 
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true); // allow Postman / server-to-server requests
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true, // allows cookies/auth headers
 };
 
 // Enable CORS for all routes
 app.use(cors(corsOptions));
+
 // Preflight handling
 app.options("*", cors(corsOptions));
+
 // ===== Middleware =====
 app.use(express.json());
 

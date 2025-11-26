@@ -14,19 +14,14 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/login`, {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  credentials: "include",
-  body: JSON.stringify(form),
-});
-
+       const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/auth/login`, 
+       form
+    );
       const data = await res.json();
       if (!res.ok) {
         alert(data.message || "Login failed");
         return;
       }
-
       localStorage.setItem("token", data.token);
       navigate("/home");
     } catch (err) {
