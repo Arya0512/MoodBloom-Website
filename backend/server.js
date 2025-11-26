@@ -14,7 +14,7 @@ const userProfile = require("./routes/profileRoute");
 
 // ===== CORS Setup =====
 
-
+app.use(express.json());
 // ===== CORS Setup =====
 const allowedOrigins = [
   "http://localhost:5173",
