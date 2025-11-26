@@ -12,11 +12,11 @@ const authRoutes = require("./routes/authRoute");
 const actRoutes = require("./routes/act");
 const userProfile = require("./routes/profileRoute");
 
-// ===== Middleware =====
+app.use(cors());
 app.use(express.json());
 
 // ===== CORS Setup =====
-const allowedOrigins = [
+/*const allowedOrigins = [
   "http://localhost:5173",
   "https://moodbloom-project-git-main-arya-waskars-projects.vercel.app",
   "https://moodbloom-project-esjohygje-arya-waskars-projects.vercel.app",
@@ -41,7 +41,7 @@ app.use(cors({
 app.options("*", cors({
   origin: allowedOrigins,
   credentials: true
-}));
+}));*/
 
 
 // ===== Routes =====
