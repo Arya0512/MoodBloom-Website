@@ -12,9 +12,9 @@ const authRoutes = require("./routes/authRoute");
 const actRoutes = require("./routes/act");
 const userProfile = require("./routes/profileRoute");
 
-// ===== CORS Setup =====
-
+// ===== Middleware =====
 app.use(express.json());
+
 // ===== CORS Setup =====
 const allowedOrigins = [
   "http://localhost:5173",
@@ -24,22 +24,20 @@ const allowedOrigins = [
 
 const corsOptions = {
   origin: function (origin, callback) {
-    if (!origin) return callback(null, true); 
-
+    if (!origin) return callback(null, true); // allow Postman or server-to-server requests
     if (allowedOrigins.includes(origin)) {
-      callback(null, true);
+      callback(null, origin); // send origin explicitly for credentials
     } else {
       callback(new Error("Not allowed by CORS"));
     }
   },
+  credentials: true, // allow cookies/auth headers
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  credentials: true,
 };
 
-// enable cors
+// Apply CORS
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
-
 
 // ===== Routes =====
 app.use("/api/auth", authRoutes);
@@ -58,5 +56,5 @@ mongoose.connect(process.env.MONGO_URI)
 
 // ===== Start Server =====
 app.listen(PORT, () => {
-  console.log(` Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
