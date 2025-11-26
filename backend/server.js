@@ -18,8 +18,7 @@ app.use(express.json());
 // ===== CORS Setup =====
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://moodbloom-act-website.onrender.com",
-  "https://moodbloom-webapp.onrender.com",
+  "https://moodbloom-project-git-main-arya-waskars-projects.vercel.app/",
 ];
 
 const corsOptions = {
